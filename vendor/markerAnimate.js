@@ -16,9 +16,10 @@ google.maps.Marker.prototype.animateTo = function(newPosition, options) {
   options = options || {};
 
   // complete missing options
-  for (key in defaultOptions) {
+  for (const key in defaultOptions) {
     options[key] = options[key] || defaultOptions[key];
   }
+  
 
   // throw exception if easing function doesn't exist
   if (options.easing != 'linear') {            
@@ -34,8 +35,8 @@ google.maps.Marker.prototype.animateTo = function(newPosition, options) {
   // save current position. prefixed to avoid name collisions. separate for lat/lng to avoid calling lat()/lng() in every frame
   this.AT_startPosition_lat = this.getPosition().lat();
   this.AT_startPosition_lng = this.getPosition().lng();
-  var newPosition_lat = newPosition.lat();
-  var newPosition_lng = newPosition.lng();
+  let newPosition_lat = newPosition.lat();
+  let newPosition_lng = newPosition.lng();
   
   // crossing the 180° meridian and going the long way around the earth?
   if (Math.abs(newPosition_lng - this.AT_startPosition_lng) > 180) {
@@ -46,10 +47,10 @@ google.maps.Marker.prototype.animateTo = function(newPosition, options) {
     }
   }
 
-  var animateStep = function(marker, startTime) {            
-    var ellapsedTime = (new Date()).getTime() - startTime;
-    var durationRatio = ellapsedTime / options.duration; // 0 - 1
-    var easingDurationRatio = durationRatio;
+  const animateStep = function(marker, startTime) {            
+    let ellapsedTime = (new Date()).getTime() - startTime;
+    let durationRatio = ellapsedTime / options.duration; // 0 - 1
+    let easingDurationRatio = durationRatio;
 
     // use jQuery easing if it's not linear
     if (options.easing !== 'linear') {
